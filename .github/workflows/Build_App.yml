@@ -19,3 +19,7 @@ jobs:
 
       - name: Hola
         run: python --version
+        
+      - name: Compilar aplicación
+        run: |
+          python -m py_compile app.py
