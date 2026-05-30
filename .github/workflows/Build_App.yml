@@ -12,9 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Ver archivos
+      - name: Mostrar archivos
         run: |
           pwd
+          ls -la
           find . -type f
 
       - name: Configurar Python
