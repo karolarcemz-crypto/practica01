@@ -6,37 +6,9 @@ on:
       - main
 
   workflow_dispatch:
-    inputs:
-      environment:
-        description: "Environment"
-        required: false
-        default: "dev"
-        type: string
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Configurar Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Compilar aplicación
-        run: |
-          python -m py_compile app.py
-          mkdir -p build
-          cp app.py build/
-
-      - name: Mostrar environment
-        run: echo "Environment: ${{ inputs.environment || 'dev' }}"
-
-      - name: Subir artefacto
-        uses: actions/upload-artifact@v4
-        with:
-          name: python-build
-          path: build/
