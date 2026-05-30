@@ -5,18 +5,20 @@ on:
     branches:
       - main
 
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Environment
+        required: false
+        default: dev
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Mostrar archivos
-        run: |
-          pwd
-          ls -la
-          find . -type f
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Configurar Python
         uses: actions/setup-python@v5
@@ -24,4 +26,17 @@ jobs:
           python-version: '3.11'
 
       - name: Compilar aplicación
-        run: python -m py_compile app.py
+        run: |
+          python -m py_compile app.py
+          mkdir build
+          cp app.py build/
+
+      - name: Imprimir environment
+        if: ${{ github.event.inputs.environment == 'dev' || github.event.inputs.environment == '' }}
+        run: echo "Environment: dev"
+
+      - name: Subir artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-build
+          path: build/
