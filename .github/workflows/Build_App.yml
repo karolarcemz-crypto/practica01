@@ -33,7 +33,9 @@ jobs:
 
       - name: Imprimir environment
         run: |
-          echo "Environment: ${{ github.event.inputs.environment }}"
+          if [ "${{ github.event.inputs.environment }}" = "dev" ] || [ -z "${{ github.event.inputs.environment }}" ]; then
+            echo "Environment: dev"
+          fi
 
       - name: Subir artefacto
         uses: actions/upload-artifact@v4
