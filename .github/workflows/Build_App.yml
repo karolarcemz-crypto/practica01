@@ -19,7 +19,14 @@ jobs:
 
       - name: Hola
         run: python --version
-        
+
+      - name: Ver archivos
+        run: |
+          echo "Directorio actual:"
+          pwd
+          echo "Archivos:"
+          ls -la
+
       - name: Compilar aplicación
         run: |
           python -m py_compile app.py
