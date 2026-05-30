@@ -11,6 +11,7 @@ on:
         description: Environment
         required: false
         default: dev
+        type: string
 
 jobs:
   build:
@@ -32,7 +33,7 @@ jobs:
           cp app.py build/
 
       - name: Imprimir environment
-        run: echo "Environment: ${{ github.event.inputs.environment || 'dev' }}"
+        run: echo "Environment: dev"
 
       - name: Subir artefacto
         uses: actions/upload-artifact@v4
