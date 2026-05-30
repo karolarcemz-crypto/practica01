@@ -12,21 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Ver archivos
+        run: |
+          pwd
+          find . -type f
+
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Hola
-        run: python --version
-
-      - name: Ver archivos
-        run: |
-          echo "Directorio actual:"
-          pwd
-          echo "Archivos:"
-          ls -la
-
       - name: Compilar aplicación
-        run: |
-          python -m py_compile app.py
+        run: python -m py_compile app.py
